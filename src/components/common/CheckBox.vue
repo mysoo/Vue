@@ -16,10 +16,10 @@
     </div>
   </div>
 
-  <!-- <span>check: {{ selectList }}</span> -->
+  <span>check: {{ selectList }}</span>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "CheckBox",
   data() {
@@ -43,7 +43,7 @@ export default {
   computed: {
     allSelected: {
       //getter
-      get: function () {
+      get(): boolean {
         return this.checkList.length === this.selectList.length;
       },
       //setter
