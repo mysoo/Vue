@@ -1,0 +1,113 @@
+{
+  "chart": {
+    "totalCount": 150,
+    "lastWeekCount": 10,
+    "onlineNormalCount": 90,
+    "onlineWarningCount": 7,
+    "onlineErrorCount": 3,
+    "offlineNormalCount": 40,
+    "offlineWarningCount": 5,
+    "offlineErrorCount": 3,
+    "offlineIncompleteCount": 2
+  },
+  "event": [
+    {
+      "eventCode": "G1",
+      "eventCategory": "Warning",
+      "createDt": 1666497600000,
+      "deviceId": "100",
+      "newFlag": "Y"
+    },
+    {
+      "eventCode": "B1",
+      "eventCategory": "Error",
+      "createDt": 1666502400000,
+      "deviceId": "101",
+      "newFlag": "Y"
+    },
+    {
+      "eventCode": "G2",
+      "eventCategory": "Warning",
+      "createDt": 1666505420000,
+      "deviceId": "102",
+      "newFlag": "Y"
+    },
+    {
+      "eventCode": "B2",
+      "eventCategory": "Warning",
+      "createDt": 1666505420000,
+      "deviceId": "101",
+      "newFlag": "Y"
+    },
+    {
+      "eventCode": "G3",
+      "eventCategory": "Warning",
+      "createDt": 1666510210000,
+      "deviceId": "103",
+      "newFlag": "Y"
+    },
+    {
+      "eventCode": "B3",
+      "eventCategory": "Error",
+      "createDt": 1666521010000,
+      "deviceId": "104",
+      "newFlag": "Y"
+    },
+    {
+      "eventCode": "G4",
+      "eventCategory": "Warning",
+      "createDt": 1666524120000,
+      "deviceId": "105",
+      "newFlag": "Y"
+    },
+    {
+      "eventCode": "B4",
+      "eventCategory": "Error",
+      "createDt": 1666524120000,
+      "deviceId": "106",
+      "newFlag": "Y"
+    }
+  ],
+  "activity": [
+    {
+      "activityType": "Installation",
+      "createDt": 1666437720000,
+      "deviceId": "107"
+    },
+    {
+      "activityType": "Installation",
+      "createDt": 1666510210000,
+      "deviceId": "109"
+    },
+    {
+      "activityType": "Replacement",
+      "createDt": 1666524120000,
+      "deviceId": "108"
+    },
+    {
+      "activityType": "Installation",
+      "createDt": 1666526400000,
+      "deviceId": "110"
+    },
+    {
+      "activityType": "Installation",
+      "createDt": 1666526400000,
+      "deviceId": "111"
+    },
+    {
+      "activityType": "Installation",
+      "createDt": 1666530000000,
+      "deviceId": "112"
+    },
+    {
+      "activityType": "Installation",
+      "createDt": 1666531800000,
+      "deviceId": "113"
+    },
+    {
+      "activityType": "Installation",
+      "createDt": 1666535400000,
+      "deviceId": "114"
+    }
+  ]
+}
