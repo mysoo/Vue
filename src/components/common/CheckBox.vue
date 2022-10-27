@@ -1,22 +1,26 @@
 <template>
-  <div class="container">
-    <div class="box">
-      <input type="checkbox" value="all" v-model="allSelected" />
-      <label for="all">All</label>
-      <div class="cb" v-for="(item, index) in checkList" :key="index">
-        <input
-          type="checkbox"
-          :id="item"
-          :value="item"
-          v-model="selectList"
-          :key="index"
-        />
-        <label :for="item" :key="index + '1'"> {{ item }}</label>
+  <div>
+    <div class="container">
+      <div class="box">
+        <input type="checkbox" value="all" v-model="allSelected" />
+        <label for="all">All</label>
+        <div class="cb" v-for="(item, index) in checkList" :key="index">
+          <input
+            type="checkbox"
+            :id="item"
+            :value="item"
+            v-model="selectList"
+            :key="index"
+          />
+          <label :for="item" :key="index + '1'"> {{ item }}</label>
+        </div>
       </div>
     </div>
-  </div>
 
-  <span>check: {{ selectList }}</span>
+    <div>
+      <span>check: {{ selectList }}</span>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -47,7 +51,7 @@ export default {
         return this.checkList.length === this.selectList.length;
       },
       //setter
-      set: function (e) {
+      set(e: boolean) {
         this.selectList = e ? this.checkList : [];
       },
     },
