@@ -2,8 +2,9 @@
   <div>
     <div class="container">
       <div class="box">
-        <input type="checkbox" value="all" v-model="allSelected" />
+        <input type="checkbox" value="all" v-model="allselected" />
         <label for="all">All</label>
+
         <div class="cb" v-for="(item, index) in checkList" :key="index">
           <input
             type="checkbox"
@@ -26,35 +27,32 @@
 <script lang="ts">
 export default {
   name: "CheckBox",
-  data() {
-    return {
-      checkList: [
-        "Republic of Korea",
-        "Germany",
-        "United Kingdom",
-        "Italy",
-        "Portugal",
-        "France",
-        "Austria",
-        "Denmark",
-        "Morocco",
-        "Australia",
-        "etc",
-      ],
-      selectList: [],
+  setup() {
+    const checkList: string[] = [
+      "Republic of Korea",
+      "Germany",
+      "United Kingdom",
+      "Italy",
+      "Portugal",
+      "France",
+      "Austria",
+      "Denmark",
+      "Morocco",
+      "Australia",
+      "etc",
+    ];
+    const selectList: string[] = [];
+    const allselected = (): string[] => {
+      console.log(checkList);
+      checkList.map((i) => selectList.push(i));
+      return selectList;
     };
-  },
-  computed: {
-    allSelected: {
-      //getter
-      get(): boolean {
-        return this.checkList.length === this.selectList.length;
-      },
-      //setter
-      set(e: boolean) {
-        this.selectList = e ? this.checkList : [];
-      },
-    },
+
+    return {
+      checkList,
+      selectList,
+      allselected,
+    };
   },
 };
 </script>

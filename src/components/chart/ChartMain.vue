@@ -26,10 +26,10 @@ export default {
     },
   },
 
-  data() {
-    return {};
-  },
-  computed: {},
+  // setup(props: object) {
+  //   console.log(props);
+  //   return {};
+  // },
 };
 </script>
 

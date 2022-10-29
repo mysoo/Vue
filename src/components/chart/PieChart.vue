@@ -1,15 +1,17 @@
 <template>
-  <div class="container">
-    <div class="box">
-      <p>Product</p>
-      <p>Installed Last Week</p>
+  <div>
+    <div class="container">
+      <div class="box">
+        <p>Product</p>
+        <p>Installed Last Week</p>
+      </div>
+    </div>
+    <div>
+      <highcharts :options="chartOptions"></highcharts>
     </div>
   </div>
 
-  <div>
-    <highcharts :options="chartOptions"></highcharts>
-  </div>
-  <h3>{{ chartData }}</h3>
+  <!-- <h3>{{ chartData }}</h3> -->
 </template>
 
 <script lang="ts">
@@ -28,9 +30,9 @@ export default defineComponent({
         return {};
       },
     },
-    // chartOptions: String,
   },
-  data() {
+  setup(props: object) {
+    console.log(props);
     return {
       chartOptions: {
         title: {
