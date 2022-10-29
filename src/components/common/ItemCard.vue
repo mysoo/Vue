@@ -2,6 +2,9 @@
   <div class="container">
     <div class="title">
       <p>{{ title }}</p>
+      <button class="btn">
+        <img class="img" alt="arrow img" src="../../assets/right-arrow.png" />
+      </button>
     </div>
     <div>
       <ItemList
@@ -77,10 +80,21 @@ export default defineComponent({
   font-weight: bold;
   font-size: 1.5em;
   display: flex;
-  flex-direction: start;
+  justify-content: space-between;
+  align-items: center;
   color: black;
   p {
     padding-left: 55px;
+  }
+  .img {
+    height: 20px;
+    width: 20px;
+    padding-right: 55px;
+  }
+  .btn {
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 }
 .content {
