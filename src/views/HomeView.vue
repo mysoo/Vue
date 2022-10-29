@@ -1,34 +1,62 @@
 <template>
   <div class="home">
     <ChartMain :chartData="datas" />
+    <div class="container">
+      <div class="lists">
+        <EventHistoryMain :eventHistoryDatas="eventHistoryDatas" />
+        <RecentActivitiesMain :RecentActivitiesDatas="RecentActivitiesDatas" />
+      </div>
+    </div>
+
     <!-- <h1 v-for="(item, index) in datas" :key="index">{{ item }}</h1> -->
     <!-- emit으로 값 가져오기 -->
-
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ChartMain from "../components/chart/ChartMain.vue";
 import jsonData from "../components/json/data.json";
-
+import ChartMain from "../components/chart/ChartMain.vue";
+import EventHistoryMain from "../components/eventHistory/EventHistoryMain.vue";
+import RecentActivitiesMain from "../components/recentActivities/RecentActivitiesMain.vue";
 export default defineComponent({
   name: "HomeView",
   components: {
-    // HelloWorld,
-    // data,
     ChartMain,
+    EventHistoryMain,
+    RecentActivitiesMain,
   },
 
-  methods: {},
-  computed: {
-    datas() {
-      return jsonData.chart.map((items) => {
-        return items;
-      });
-    },
+  setup() {
+    const datas = jsonData.chart.map((items: object) => {
+      return items;
+    });
+    const eventHistoryDatas = jsonData.event.map((items: object) => {
+      return items;
+    });
+    const RecentActivitiesDatas = jsonData.activity.map((items: object) => {
+      return items;
+    });
+    return {
+      datas,
+      eventHistoryDatas,
+      RecentActivitiesDatas,
+    };
   },
 });
 </script>
+
+<style scoped lang="scss">
+.container {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+.lists {
+  box-sizing: border-box;
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+</style>
