@@ -14,7 +14,7 @@
     </p>
     <p v-if="startDate">
       <span>Start Date</span>
-      <span class="iv">{{ startDate }}</span>
+      <span class="iv">{{ convertStartDate }}</span>
     </p>
     <p v-if="eventCode">
       <span>Event Code</span>
@@ -26,7 +26,7 @@
     </p>
     <p v-if="date">
       <span>Date</span>
-      <span class="iv">{{ date }}</span>
+      <span class="iv">{{ convertDate }}</span>
     </p>
     <p v-if="activityType">
       <span>activityType</span>
@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import moment from "moment";
 
 export default defineComponent({
   name: "ItemList",
@@ -51,8 +52,11 @@ export default defineComponent({
     date: Number,
     activityType: String,
   },
-  setup() {
-    return {};
+  setup(props) {
+    const convertStartDate = moment(props.startDate).format("DD/MM/YYYY hh:mm");
+    const convertDate = moment(props.date).format("DD/MM/YYYY hh:mm");
+
+    return { convertStartDate, convertDate };
   },
 });
 </script>
@@ -68,9 +72,11 @@ export default defineComponent({
   span {
     padding-right: 50px;
     display: flex;
-    min-width: 100px;
+    min-width: 30%;
   }
   .iv {
+    display: flex;
+    min-width: 50%;
     font-weight: bold;
   }
 }
