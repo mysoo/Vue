@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="box">
-      <div><CheckBox all="true" @selectList="selectList" /></div>
+      <div><CheckBox @selectList="selectList" /></div>
       <div class="container">
         <div class="titlebox">
           <p>Product</p>
@@ -10,11 +10,19 @@
       </div>
       <div class="chartbox">
         <div>
-          <PieChart :chartData="chartData" :selectedList="selectList" />
+          <PieChart
+            :subtitle="onLine"
+            :chartData="chartData"
+            :selectedList="selectList"
+          />
         </div>
 
         <div>
-          <PieChart :chartData="chartData" :selectedList="selectList" />
+          <PieChart
+            :subtitle="offLine"
+            :chartData="chartData"
+            :selectedList="selectList"
+          />
         </div>
       </div>
 
@@ -45,9 +53,10 @@ export default {
     },
   },
 
-  setup(props: any) {
-    console.log(props.selectList);
-    return {};
+  setup() {
+    const onLine = "Online";
+    const offLine = "Offline";
+    return { onLine, offLine };
   },
 };
 </script>

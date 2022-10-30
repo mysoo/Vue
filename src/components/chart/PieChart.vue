@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="container">
-      <div>
-        <highcharts :options="chartOptions"></highcharts>
+    <div>
+      <div class="container">
+        <div>
+          <highcharts :options="chartOptions"></highcharts>
+        </div>
       </div>
-      <!-- <h3>hi{{ chartData }}</h3> -->
     </div>
+    <p>{{ subtitle }}</p>
   </div>
 </template>
 
@@ -25,12 +27,13 @@ export default defineComponent({
         return {};
       },
     },
-    // selectList: {
-    //   type: Object,
-    //   default: () => {
-    //     return {};
-    //   },
-    // },
+    selectedList: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    subtitle: String,
   },
   setup(props: object) {
     console.log(props);
@@ -50,6 +53,10 @@ export default defineComponent({
           },
         },
         colors: ["red", "yellow", "blue", "orange"],
+        credits: {
+          //remove mark
+          enabled: false,
+        },
         series: [
           {
             type: "pie",
@@ -75,5 +82,9 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   flex-direction: column;
+  min-width: 400px;
+}
+p {
+  font-weight: bold;
 }
 </style>
