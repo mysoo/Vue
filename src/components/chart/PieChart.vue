@@ -50,6 +50,7 @@ export default defineComponent({
             dataLabels: {
               enabled: true,
             },
+            showInLegend: true,
           },
         },
         colors: ["red", "yellow", "blue", "orange"],
@@ -57,6 +58,25 @@ export default defineComponent({
           //remove mark
           enabled: false,
         },
+        legend: {
+          //범례
+          layout: "horizontal",
+          align: "center",
+          verticalAlign: "top",
+          x: -4,
+          y: -2,
+          itemMarginTop: 30, //범례 margin top 지정(bottom도 존재.)
+          symbolHeight: 10,
+          symbolWidth: 10,
+          // symbolPadding: 5,
+          symbolRadius: 0,
+          itemStyle: {
+            color: "#444",
+            fontSize: "15px",
+            fontWeight: "normal",
+          },
+        },
+
         series: [
           {
             type: "pie",
@@ -83,6 +103,7 @@ export default defineComponent({
   justify-content: center;
   flex-direction: column;
   min-width: 400px;
+  // border: 1px solid red;
 }
 p {
   font-weight: bold;
