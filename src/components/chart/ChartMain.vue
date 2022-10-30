@@ -1,11 +1,24 @@
 <template>
   <div class="container">
     <div class="box">
-      <div><CheckBox /></div>
-      <div><PieChart :chartData="chartData" /></div>
-      <!-- <div>{{ name }}</div> -->
+      <div><CheckBox all="true" @selectList="selectList" /></div>
+      <div class="container">
+        <div class="titlebox">
+          <p>Product</p>
+          <p>Installed Last Week</p>
+        </div>
+      </div>
+      <div class="chartbox">
+        <div>
+          <PieChart :chartData="chartData" :selectedList="selectList" />
+        </div>
+
+        <div>
+          <PieChart :chartData="chartData" :selectedList="selectList" />
+        </div>
+      </div>
+
       <!-- checkbox value를 emit으로 piechart에 전달 -->
-      <!-- emit실패,, store에 저장해서 넘기는걸로 수정해보자 -->
     </div>
   </div>
 </template>
@@ -24,12 +37,18 @@ export default {
         return {};
       },
     },
+    selectList: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
   },
 
-  // setup(props: object) {
-  //   console.log(props);
-  //   return {};
-  // },
+  setup(props: any) {
+    console.log(props.selectList);
+    return {};
+  },
 };
 </script>
 
@@ -47,5 +66,22 @@ export default {
   box-shadow: 3px 3px 3px 3px #7aade0;
   border-radius: 10px;
   padding: 40px;
+  .chartbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    // background: yellow;
+  }
+}
+.titlebox {
+  box-sizing: border-box;
+  border-bottom: 2px solid rgb(160, 159, 159);
+  width: 90%;
+  display: flex;
+
+  p {
+    margin: 2% 2% 2% 0;
+    font-weight: bold;
+  }
 }
 </style>

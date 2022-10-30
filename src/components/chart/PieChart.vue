@@ -1,17 +1,12 @@
 <template>
   <div>
     <div class="container">
-      <div class="box">
-        <p>Product</p>
-        <p>Installed Last Week</p>
+      <div>
+        <highcharts :options="chartOptions"></highcharts>
       </div>
-    </div>
-    <div>
-      <highcharts :options="chartOptions"></highcharts>
+      <!-- <h3>hi{{ chartData }}</h3> -->
     </div>
   </div>
-
-  <!-- <h3>{{ chartData }}</h3> -->
 </template>
 
 <script lang="ts">
@@ -30,6 +25,12 @@ export default defineComponent({
         return {};
       },
     },
+    // selectList: {
+    //   type: Object,
+    //   default: () => {
+    //     return {};
+    //   },
+    // },
   },
   setup(props: object) {
     console.log(props);
@@ -44,7 +45,7 @@ export default defineComponent({
         plotOptions: {
           pie: {
             dataLabels: {
-              enabled: false,
+              enabled: true,
             },
           },
         },
@@ -53,7 +54,7 @@ export default defineComponent({
           {
             type: "pie",
             name: "",
-            innerSize: "45%",
+            innerSize: "0%",
             data: [
               ["1", 10.0],
               ["2", 20.0],
@@ -73,14 +74,6 @@ export default defineComponent({
 .container {
   display: flex;
   justify-content: center;
-}
-.box {
-  border-bottom: 2px solid rgb(160, 159, 159);
-  width: 90%;
-  display: flex;
-  p {
-    margin: 2% 2% 2% 0;
-    font-weight: bold;
-  }
+  flex-direction: column;
 }
 </style>
