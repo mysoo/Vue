@@ -2,7 +2,12 @@
   <div>
     <div class="container">
       <div class="box">
-        <input type="checkbox" :value="all" v-model="allselected" />
+        <input
+          type="checkbox"
+          value="all"
+          v-model="allselected"
+          @click="allCheck"
+        />
         <label for="all">All</label>
 
         <div class="cb" v-for="(item, index) in checkList" :key="index">
@@ -30,19 +35,9 @@ import { ref } from "vue";
 import type { Ref } from "vue";
 export default {
   name: "CheckBox",
-  props: {
-    all: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  model: {
-    props: "all",
-    event: "input",
-  },
+  props: {},
 
   setup() {
-    // const allselected = true;
     const checkList: string[] = [
       "Republic of Korea",
       "Germany",
@@ -57,23 +52,30 @@ export default {
       "etc",
     ];
     let selectList: Ref<string[]> = ref([]);
-    const allselected = ref(true);
-
-    // const allselected = selectList.value;
-
-    // const allselected = (): string[] => {
-    //   // console.log(checkList);
-    //   // selectList.value.push(checkList);
-    //   checkList.map((i) => selectList.value.push(i));
-    //   // checkList.map((i) => (selectList.value = sel));
-    //   console.log("g", selectList.value);
-    //   return selectList.value;
-    // };
+    for (let i = 0; i < checkList.length; i++) {
+      selectList.value.push(String(checkList[i]));
+    }
+    let allselected = ref(true);
+    const allCheck = () => {
+      if (!allselected.value) {
+        if (selectList.value.length != 0) {
+          selectList.value = [];
+        }
+        for (let i = 0; i < checkList.length; i++) {
+          selectList.value.push(String(checkList[i]));
+        }
+        allselected.value = true;
+      } else {
+        selectList.value = [];
+        allselected.value = false;
+      }
+    };
 
     return {
       checkList,
       selectList,
       allselected,
+      allCheck,
     };
   },
 };
