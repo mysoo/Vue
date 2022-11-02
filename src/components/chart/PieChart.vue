@@ -27,7 +27,13 @@ export default defineComponent({
         return {};
       },
     },
-    selectedList: {
+    onlineSelectList: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    offlineSelectList: {
       type: Object,
       default: () => {
         return {};
@@ -35,8 +41,9 @@ export default defineComponent({
     },
     subtitle: String,
   },
-  setup(props: object) {
-    console.log(props);
+  setup(props: any) {
+    console.log("props_on", props.onlineSelectList);
+    console.log("props_off", props.offlineSelectList);
     return {
       chartOptions: {
         title: {

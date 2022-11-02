@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="box">
-      <div><CheckBox @selectList="selectList" /></div>
+      <div><CheckBox @selectList="selectListsview" /></div>
       <div class="container">
         <div class="titlebox">
           <p>Product</p>
@@ -13,7 +13,7 @@
           <PieChart
             :subtitle="onLine"
             :chartData="chartData"
-            :selectedList="selectList"
+            :selectedList="onlineSelectList"
           />
         </div>
 
@@ -21,12 +21,10 @@
           <PieChart
             :subtitle="offLine"
             :chartData="chartData"
-            :selectedList="selectList"
+            :selectedList="offlineSelectList"
           />
         </div>
       </div>
-
-      <!-- checkbox value를 emit으로 piechart에 전달 -->
     </div>
   </div>
 </template>
@@ -45,18 +43,33 @@ export default {
         return {};
       },
     },
-    selectList: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
   },
 
-  setup() {
+  setup(props: any) {
+    console.log("chartData!!", props.chartData);
+
     const onLine = "Online";
     const offLine = "Offline";
-    return { onLine, offLine };
+
+    const selectListsview = (selectLists: string[]) => {
+      console.log(selectLists);
+    };
+    // selectList데이터를 가공해서 piechart에 전달하기
+    const onlineSelectList = props.chartData.map((items: object) => {
+      console.log("it", items);
+      return items;
+    });
+    const offlineSelectList = props.chartData.map((items: object) => {
+      return items;
+    });
+
+    return {
+      onLine,
+      offLine,
+      selectListsview,
+      onlineSelectList,
+      offlineSelectList,
+    };
   },
 };
 </script>

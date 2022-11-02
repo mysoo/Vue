@@ -7,9 +7,6 @@
         <RecentActivitiesMain :RecentActivitiesDatas="RecentActivitiesDatas" />
       </div>
     </div>
-
-    <!-- <h1 v-for="(item, index) in datas" :key="index">{{ item }}</h1> -->
-    <!-- emit으로 값 가져오기 -->
   </div>
 </template>
 

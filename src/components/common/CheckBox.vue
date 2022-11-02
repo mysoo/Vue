@@ -7,12 +7,13 @@
           value="all"
           v-model="allselected"
           @click="allCheck"
+          @change="deliverSelectList"
         />
         <label for="all">All</label>
 
         <div class="cb" v-for="(item, index) in checkList" :key="index">
           <input
-            @input="() => $emit('selectList', selectList)"
+            @change="deliverSelectList"
             type="checkbox"
             :id="item"
             :value="item"
@@ -33,11 +34,13 @@
 <script lang="ts">
 import { ref } from "vue";
 import type { Ref } from "vue";
+
 export default {
   name: "CheckBox",
   props: {},
 
-  setup() {
+  setup(props: object, context: any) {
+    const { emit } = context;
     const checkList: string[] = [
       "Republic of Korea",
       "Germany",
@@ -51,6 +54,7 @@ export default {
       "Australia",
       "etc",
     ];
+
     let selectList: Ref<string[]> = ref([]);
     for (let i = 0; i < checkList.length; i++) {
       selectList.value.push(String(checkList[i]));
@@ -70,12 +74,17 @@ export default {
         allselected.value = false;
       }
     };
+    const deliverSelectList = () => {
+      // console.log(selectList.value);
+      emit("selectList", selectList.value);
+    };
 
     return {
       checkList,
       selectList,
       allselected,
       allCheck,
+      deliverSelectList,
     };
   },
 };
