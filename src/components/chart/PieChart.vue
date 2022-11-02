@@ -69,7 +69,7 @@ export default defineComponent({
           symbolHeight: 10,
           symbolWidth: 10,
           // symbolPadding: 5,
-          symbolRadius: 0,
+          symbolRadius: 10,
           itemStyle: {
             color: "#444",
             fontSize: "15px",
