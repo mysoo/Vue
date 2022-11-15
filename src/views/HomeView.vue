@@ -48,12 +48,12 @@ export default defineComponent({
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-}
-.lists {
-  box-sizing: border-box;
-  width: 85%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  .lists {
+    box-sizing: border-box;
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 </style>

@@ -100,20 +100,19 @@ export default defineComponent({
   margin-top: 40px;
   display: flex;
   justify-content: center;
-}
-.box {
-  box-sizing: border-box;
-  background-color: #fff;
-  min-height: 300px;
-  width: 85%;
-  box-shadow: 3px 3px 3px 3px #7aade0;
-  border-radius: 10px;
-  padding: 40px;
-  .chartbox {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    // background: yellow;
+  .box {
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: 300px;
+    width: 85%;
+    box-shadow: 3px 3px 3px 3px #7aade0;
+    border-radius: 10px;
+    padding: 40px;
+    .chartbox {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
   }
 }
 .titlebox {

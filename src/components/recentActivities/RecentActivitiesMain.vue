@@ -33,18 +33,9 @@ export default {
   width: 100%;
   justify-content: center;
   flex-direction: column;
-}
-.box {
-  box-sizing: border-box;
-  background-color: #fff;
-  min-height: 300px;
-  width: 85%;
-  box-shadow: 3px 3px 3px 3px #7aade0;
-  border-radius: 10px;
-  padding: 40px;
-}
-.listbox {
-  box-sizing: border-box;
-  display: flex;
+  &.listbox {
+    box-sizing: border-box;
+    display: flex;
+  }
 }
 </style>

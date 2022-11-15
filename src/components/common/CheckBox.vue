@@ -95,16 +95,15 @@ export default {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-}
-.box {
-  box-sizing: border-box;
-  display: inline;
-  justify-content: center;
-  width: 90%;
-  font-size: 1em;
-  background-color: rgb(223, 217, 217);
-  padding: 2.5%;
-  border-radius: 10px;
+  .box {
+    box-sizing: border-box;
+    display: inline;
+    width: 90%;
+    font-size: 1em;
+    background-color: rgb(223, 217, 217);
+    padding: 2.5%;
+    border-radius: 10px;
+  }
 }
 .cb {
   box-sizing: border-box;

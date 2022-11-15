@@ -120,9 +120,9 @@ export default defineComponent({
   justify-content: center;
   flex-direction: column;
   min-width: 400px;
-  // border: 1px solid red;
-}
-p {
-  font-weight: bold;
+
+  @at-root p {
+    font-weight: bold;
+  }
 }
 </style>
