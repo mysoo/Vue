@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <p>{{ subtitle }}</p>
+    <p>{{ subtitle }} {{ onlinetotal }}</p>
   </div>
 </template>
 
@@ -39,11 +39,18 @@ export default defineComponent({
         return {};
       },
     },
+    onlinetotal: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
     subtitle: String,
   },
-  setup(props: any) {
+  setup(props) {
     console.log("props_on", props.onlineSelectList);
     console.log("props_off", props.offlineSelectList);
+    console.log("onlinetotal", props.onlinetotal);
     return {
       chartOptions: {
         title: {
@@ -63,6 +70,9 @@ export default defineComponent({
         colors: ["red", "yellow", "blue", "orange"],
         credits: {
           //remove mark
+          enabled: false,
+        },
+        accessibility: {
           enabled: false,
         },
         legend: {

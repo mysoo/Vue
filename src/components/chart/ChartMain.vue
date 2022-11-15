@@ -14,6 +14,7 @@
             :subtitle="onLine"
             :chartData="chartData"
             :selectedList="onlineSelectList"
+            :onlinetotal="onlineSelectList"
           />
         </div>
 
@@ -30,10 +31,13 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+import { ref } from "vue";
+import type { Ref } from "vue";
 import CheckBox from "../common/CheckBox.vue";
 import PieChart from "../chart/PieChart.vue";
 
-export default {
+export default defineComponent({
   name: "ChartMain",
   components: { CheckBox, PieChart },
   props: {
@@ -45,20 +49,37 @@ export default {
     },
   },
 
-  setup(props: any) {
+  setup(props) {
     console.log("chartData!!", props.chartData);
 
     const onLine = "Online";
     const offLine = "Offline";
+    let onlinetotal: Ref<number> = ref(0);
+    let onV: any;
+    let onlineSelectList: Ref<string[]> = ref([]);
 
     const selectListsview = (selectLists: string[]) => {
-      console.log(selectLists);
+      console.log("selectLists", selectLists);
+      // selectLists가 바뀌면 value를 초기화 해야 함
+
+      onlineSelectList.value = props.chartData.map((items: any) => {
+        for (let i in selectLists) {
+          if (items.countryCd == selectLists[i]) {
+            onV =
+              items.onlineErrorCount +
+              items.onlineNormalCount +
+              items.onlineWarningCount;
+
+            console.log("it", onV);
+          }
+        }
+        onlinetotal.value += onV;
+        console.log("hhh", onlinetotal.value);
+        return onlinetotal.value;
+      });
     };
+
     // selectList데이터를 가공해서 piechart에 전달하기
-    const onlineSelectList = props.chartData.map((items: object) => {
-      console.log("it", items);
-      return items;
-    });
     const offlineSelectList = props.chartData.map((items: object) => {
       return items;
     });
@@ -71,7 +92,7 @@ export default {
       offlineSelectList,
     };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

@@ -25,9 +25,9 @@
       </div>
     </div>
 
-    <div>
+    <!-- <div>
       <span>check: {{ selectList }}</span>
-    </div>
+    </div> -->
   </div>
 </template>
 
