@@ -42,7 +42,6 @@ import moment from "moment";
 export default defineComponent({
   name: "ItemList",
   props: {
-    title: String,
     serialNO: String,
     event: String,
     category: String,
@@ -63,6 +62,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .content {
+  box-sizing: border-box;
   padding: 30px 300px 0px 50px;
 
   p {
