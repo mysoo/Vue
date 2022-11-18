@@ -15,8 +15,8 @@
           </div>
           <div>
             <ItemList
-              :RecentActivitiesDatas="RecentActivitiesDatas"
-              v-for="(activity, index) in RecentActivitiesDatas"
+              :recentActivitiesDatas="recentActivitiesDatas"
+              v-for="(activity, index) in recentActivitiesDatas"
               :key="index"
               :serialNO="activity.deviceId"
               :date="activity.createDt"
@@ -29,18 +29,19 @@
   </div>
   <!-- <div class="listbox">
     <div>
-      <ItemCard :title="title" :RecentActivitiesDatas="RecentActivitiesDatas" />
+      <ItemCard :title="title" :recentActivitiesDatas="recentActivitiesDatas" />
     </div>
   </div> -->
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import ItemList from "../common/ItemList.vue";
-export default {
+export default defineComponent({
   name: "RecentActivitiesMain",
   components: { ItemList },
   props: {
-    RecentActivitiesDatas: {
+    recentActivitiesDatas: {
       type: Object,
       default: () => {
         return {};
@@ -51,7 +52,7 @@ export default {
     const title = "Recent Activities";
     return { title };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

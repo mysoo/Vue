@@ -4,7 +4,7 @@
     <div class="container">
       <div class="lists">
         <EventHistoryMain :eventHistoryDatas="eventHistoryDatas" />
-        <RecentActivitiesMain :RecentActivitiesDatas="RecentActivitiesDatas" />
+        <RecentActivitiesMain :recentActivitiesDatas="recentActivitiesDatas" />
       </div>
     </div>
   </div>
@@ -31,13 +31,13 @@ export default defineComponent({
     const eventHistoryDatas = jsonData.event.map((items: object) => {
       return items;
     });
-    const RecentActivitiesDatas = jsonData.activity.map((items: object) => {
+    const recentActivitiesDatas = jsonData.activity.map((items: object) => {
       return items;
     });
     return {
       datas,
       eventHistoryDatas,
-      RecentActivitiesDatas,
+      recentActivitiesDatas,
     };
   },
 });

@@ -4,6 +4,8 @@
       <span>Serial No.</span>
       <span class="iv">{{ serialNO }}</span>
     </p>
+
+    <!-- <InputForm :eventHistoryDatas="eventHistoryDatas" /> -->
     <p v-if="event">
       <span>Event</span>
       <span class="iv">{{ event }}</span>
@@ -38,10 +40,24 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import moment from "moment";
+// import InputForm from "./InputForm.vue";
 
 export default defineComponent({
   name: "ItemList",
+  // components: { InputForm },
   props: {
+    eventHistoryDatas: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    recentActivitiesDatas: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
     serialNO: String,
     event: String,
     category: String,
@@ -52,6 +68,13 @@ export default defineComponent({
     activityType: String,
   },
   setup(props) {
+    // titles = props.recentActivitiesDatas.map((items: object) => {
+    //   return Object.keys(items);
+    // });
+    // values = props.recentActivitiesDatas.map((items: object) => {
+    //   return Object.values(items);
+    // });
+
     const convertStartDate = moment(props.startDate).format("DD/MM/YYYY hh:mm");
     const convertDate = moment(props.date).format("DD/MM/YYYY hh:mm");
 

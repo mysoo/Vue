@@ -33,9 +33,10 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import ItemList from "../common/ItemList.vue";
 // import ItemCard from "../common/ItemCard.vue";
-export default {
+export default defineComponent({
   name: "EventHistoyMain",
   components: { ItemList },
   // components: { ItemCard },
@@ -51,7 +52,7 @@ export default {
     const title = "Event History";
     return { title };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">
