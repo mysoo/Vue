@@ -143,7 +143,7 @@ export default defineComponent({
     font-weight: bold;
   }
   .values {
-    color: rgb(59, 122, 238);
+    color: #0c70f2;
   }
 }
 </style>
