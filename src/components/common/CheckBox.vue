@@ -24,22 +24,22 @@
         </div>
       </div>
     </div>
-
-    <!-- <div>
+    <!-- 
+    <div>
       <span>check: {{ selectList }}</span>
     </div> -->
   </div>
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import type { Ref } from "vue";
 
-export default {
+export default defineComponent({
   name: "CheckBox",
   props: {},
 
-  setup(props: object, context: any) {
+  setup(props, context) {
     const { emit } = context;
     const checkList: string[] = [
       "Republic of Korea",
@@ -74,10 +74,9 @@ export default {
         allselected.value = false;
       }
     };
-    const deliverSelectList = () => {
-      // console.log(selectList.value);
-      emit("selectList", selectList.value);
-    };
+    const deliverSelectList = computed(() => {
+      return emit("selectList", selectList.value);
+    });
 
     return {
       checkList,
@@ -87,7 +86,7 @@ export default {
       deliverSelectList,
     };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

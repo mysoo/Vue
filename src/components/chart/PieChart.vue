@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <p>{{ subtitle }} {{ onlinetotal }}</p>
+    <p>{{ subtitle }} {{ chartData }}</p>
   </div>
 </template>
 
@@ -27,31 +27,28 @@ export default defineComponent({
         return {};
       },
     },
-    onlineSelectList: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
-    offlineSelectList: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
-    onlinetotal: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
+
     subtitle: String,
   },
   setup(props) {
-    console.log("props_on", props.onlineSelectList);
-    console.log("props_off", props.offlineSelectList);
-    console.log("onlinetotal", props.onlinetotal);
+    // console.log("chartData", props.chartData);
+    const offlineSelectList = props.chartData.map((items: object) => {
+      // console.log(items);
+
+      // console.log(Object.keys(items));
+      const includeOff = Object.keys(items);
+      for (let i = 0; i < includeOff.length; i++) {
+        if (includeOff[i].includes("off")) {
+          // console.log(includeOff[i]);
+        }
+      }
+
+      return Object.keys(items);
+    });
+    // console.log("offff", offlineSelectList);
+
     return {
+      offlineSelectList,
       chartOptions: {
         title: {
           text: "",

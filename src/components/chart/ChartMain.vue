@@ -5,25 +5,19 @@
       <div class="container">
         <div class="titlebox">
           <p>Product</p>
+          <p class="values">{{ totalProduct }}</p>
+
           <p>Installed Last Week</p>
+          <p class="values">{{ installedLastWeek }}</p>
         </div>
       </div>
       <div class="chartbox">
         <div>
-          <PieChart
-            :subtitle="onLine"
-            :chartData="chartData"
-            :selectedList="onlineSelectList"
-            :onlinetotal="onlineSelectList"
-          />
+          <PieChart :subtitle="onLine" :chartData="chartData" />
         </div>
 
         <div>
-          <PieChart
-            :subtitle="offLine"
-            :chartData="chartData"
-            :selectedList="offlineSelectList"
-          />
+          <PieChart :subtitle="offLine" :chartData="chartData" />
         </div>
       </div>
     </div>
@@ -31,9 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { ref } from "vue";
-import type { Ref } from "vue";
+import { defineComponent, ref, Ref, computed } from "vue";
 import CheckBox from "../common/CheckBox.vue";
 import PieChart from "../chart/PieChart.vue";
 
@@ -50,33 +42,56 @@ export default defineComponent({
   },
 
   setup(props) {
-    console.log("chartData!!", props.chartData);
-
     const onLine = "Online";
     const offLine = "Offline";
-    let onlinetotal: Ref<number> = ref(0);
-    let onV: any;
-    let onlineSelectList: Ref<string[]> = ref([]);
+    const add = (arr: number[]) =>
+      arr.reduce((a: number, b: number) => a + b, 0);
+
+    const initProduct = props.chartData.map((i: any) => {
+      return i.totalCount;
+    });
+
+    const initInstalled = props.chartData.map((i: any) => {
+      return i.lastWeekCount;
+    });
+
+    const initTotalV = add(initProduct);
+    const initinstalledV = add(initInstalled);
+
+    let totalProduct = ref(initTotalV);
+    let installedLastWeek = ref(initinstalledV);
+    let totalValues = ref([]); //selectLists와 chartData 교집합
 
     const selectListsview = (selectLists: string[]) => {
-      console.log("selectLists", selectLists);
-      // selectLists가 바뀌면 value를 초기화 해야 함
+      console.log("selectLists!!", selectLists);
 
-      onlineSelectList.value = props.chartData.map((items: any) => {
-        for (let i in selectLists) {
-          if (items.countryCd == selectLists[i]) {
-            onV =
-              items.onlineErrorCount +
-              items.onlineNormalCount +
-              items.onlineWarningCount;
+      totalProduct.value = 0;
+      installedLastWeek.value = 0;
 
-            console.log("it", onV);
-          }
+      totalValues.value = props.chartData.map((i: any) => {
+        if (selectLists.includes(i.countryCd)) {
+          totalProduct.value += i.totalCount;
+          installedLastWeek.value += i.lastWeekCount;
         }
-        onlinetotal.value += onV;
-        console.log("hhh", onlinetotal.value);
-        return onlinetotal.value;
       });
+
+      // onlineSelectList.value = props.chartData.map((items: any) => {
+      //   for (let i in selectLists) {
+      //     if (items.countryCd == selectLists[i]) {
+      //       onV =
+      //         items.onlineErrorCount +
+      //         items.onlineNormalCount +
+      //         items.onlineWarningCount;
+
+      //       console.log("it", onV);
+      //     }
+      //   }
+      //   onlinetotal.value += onV;
+      //   console.log("hhh", onlinetotal.value);
+      //   return onlinetotal.value;
+      // });
+
+      return totalProduct.value, installedLastWeek.value;
     };
 
     // selectList데이터를 가공해서 piechart에 전달하기
@@ -88,8 +103,10 @@ export default defineComponent({
       onLine,
       offLine,
       selectListsview,
-      onlineSelectList,
+      // onlineSelectList,
       offlineSelectList,
+      totalProduct,
+      installedLastWeek,
     };
   },
 });
@@ -124,6 +141,9 @@ export default defineComponent({
   p {
     margin: 2% 2% 2% 0;
     font-weight: bold;
+  }
+  .values {
+    color: rgb(59, 122, 238);
   }
 }
 </style>
