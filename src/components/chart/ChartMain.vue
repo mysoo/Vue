@@ -5,10 +5,10 @@
       <div class="container">
         <div class="titlebox">
           <p>Product</p>
-          <p class="values">{{ totalProduct }}</p>
+          <p class="values">{{ totalProduct.initTotalV }}</p>
 
           <p>Installed Last Week</p>
-          <p class="values">{{ installedLastWeek }}</p>
+          <p class="values">{{ installedLastWeek.initinstalledV }}</p>
         </div>
       </div>
       <div class="chartbox">
@@ -16,7 +16,7 @@
           <PieChart
             :subtitle="onLine"
             :chartData="chartData"
-            :selectListsview="selectListsview"
+            :onlineInfo="onlineInfo"
           />
         </div>
 
@@ -24,7 +24,7 @@
           <PieChart
             :subtitle="offLine"
             :chartData="chartData"
-            :selectListsview="selectListsview"
+            :onlineInfo="onlineInfo"
           />
         </div>
       </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, computed } from "vue";
+import { defineComponent, reactive, ref, Ref, computed } from "vue";
 import CheckBox from "../common/CheckBox.vue";
 import PieChart from "../chart/PieChart.vue";
 
@@ -66,22 +66,22 @@ export default defineComponent({
     const initTotalV = add(initProduct);
     const initinstalledV = add(initInstalled);
 
-    const totalProduct = ref(initTotalV);
-    const installedLastWeek = ref(initinstalledV);
-    const totalValues = ref([]); //selectLists와 chartData 교집합
-    const onlineInfo = ref(0);
-    const offlineInfo = ref(0);
+    const totalProduct = reactive({ initTotalV: initTotalV });
+    const installedLastWeek = reactive({ initinstalledV: initinstalledV });
+    const totalValues = reactive({ value: [] }); //selectLists와 chartData 교집합
+    const onlineInfo = reactive({ value: 0 });
+    const offlineInfo = reactive({ value: 0 });
 
     const selectListsview = (selectLists: string[]) => {
       console.log("selectLists!!", selectLists);
 
-      totalProduct.value = 0;
-      installedLastWeek.value = 0;
+      totalProduct.initTotalV = 0;
+      installedLastWeek.initinstalledV = 0;
 
       totalValues.value = props.chartData.map((i: any) => {
         if (selectLists.includes(i.countryCd)) {
-          totalProduct.value += i.totalCount;
-          installedLastWeek.value += i.lastWeekCount;
+          totalProduct.initTotalV += i.totalCount;
+          installedLastWeek.initinstalledV += i.lastWeekCount;
           onlineInfo.value =
             i.onlineErrorCount + i.onlineNormalCount + i.onlineWarningCount;
           console.log(onlineInfo.value);
@@ -104,7 +104,11 @@ export default defineComponent({
       //   return onlinetotal.value;
       // });
 
-      return totalProduct.value, installedLastWeek.value, onlineInfo.value;
+      return (
+        totalProduct.initTotalV,
+        installedLastWeek.initinstalledV,
+        onlineInfo.value
+      );
     };
 
     // selectList데이터를 가공해서 piechart에 전달하기
