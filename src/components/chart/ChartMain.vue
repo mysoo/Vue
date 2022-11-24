@@ -13,11 +13,19 @@
       </div>
       <div class="chartbox">
         <div>
-          <PieChart :subtitle="onLine" :chartData="chartData" />
+          <PieChart
+            :subtitle="onLine"
+            :chartData="chartData"
+            :selectListsview="selectListsview"
+          />
         </div>
 
         <div>
-          <PieChart :subtitle="offLine" :chartData="chartData" />
+          <PieChart
+            :subtitle="offLine"
+            :chartData="chartData"
+            :selectListsview="selectListsview"
+          />
         </div>
       </div>
     </div>
@@ -58,9 +66,11 @@ export default defineComponent({
     const initTotalV = add(initProduct);
     const initinstalledV = add(initInstalled);
 
-    let totalProduct = ref(initTotalV);
-    let installedLastWeek = ref(initinstalledV);
-    let totalValues = ref([]); //selectLists와 chartData 교집합
+    const totalProduct = ref(initTotalV);
+    const installedLastWeek = ref(initinstalledV);
+    const totalValues = ref([]); //selectLists와 chartData 교집합
+    const onlineInfo = ref(0);
+    const offlineInfo = ref(0);
 
     const selectListsview = (selectLists: string[]) => {
       console.log("selectLists!!", selectLists);
@@ -72,6 +82,9 @@ export default defineComponent({
         if (selectLists.includes(i.countryCd)) {
           totalProduct.value += i.totalCount;
           installedLastWeek.value += i.lastWeekCount;
+          onlineInfo.value =
+            i.onlineErrorCount + i.onlineNormalCount + i.onlineWarningCount;
+          console.log(onlineInfo.value);
         }
       });
 
@@ -91,7 +104,7 @@ export default defineComponent({
       //   return onlinetotal.value;
       // });
 
-      return totalProduct.value, installedLastWeek.value;
+      return totalProduct.value, installedLastWeek.value, onlineInfo.value;
     };
 
     // selectList데이터를 가공해서 piechart에 전달하기
@@ -107,6 +120,7 @@ export default defineComponent({
       offlineSelectList,
       totalProduct,
       installedLastWeek,
+      onlineInfo,
     };
   },
 });

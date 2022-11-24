@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <p>{{ subtitle }} {{ chartData }}</p>
+    <p>{{ subtitle }}</p>
   </div>
 </template>
 
@@ -27,10 +27,17 @@ export default defineComponent({
         return {};
       },
     },
-
+    selectListsview: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    onlineInfo: Number,
     subtitle: String,
   },
   setup(props) {
+    console.log("online!!", props.selectListsview);
     // console.log("chartData", props.chartData);
     const offlineSelectList = props.chartData.map((items: object) => {
       // console.log(items);
