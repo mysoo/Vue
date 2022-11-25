@@ -7,12 +7,13 @@
         </div>
       </div>
     </div>
-    <p>{{ subtitle }}</p>
+    <p v-if="subtitle == 'Online'">{{ subtitle }} {{ onlineInfo.total }}</p>
+    <p v-if="subtitle == 'Offline'">{{ subtitle }} {{ offlineInfo.total }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, watch } from "vue";
 import { Chart } from "highcharts-vue";
 
 export default defineComponent({
@@ -33,29 +34,49 @@ export default defineComponent({
         return {};
       },
     },
-    onlineInfo: Number,
+    onlineInfo: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    offlineInfo: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+
     subtitle: String,
   },
   setup(props) {
-    console.log("online!!", props.selectListsview);
-    // console.log("chartData", props.chartData);
-    const offlineSelectList = props.chartData.map((items: object) => {
-      // console.log(items);
-
-      // console.log(Object.keys(items));
-      const includeOff = Object.keys(items);
-      for (let i = 0; i < includeOff.length; i++) {
-        if (includeOff[i].includes("off")) {
-          // console.log(includeOff[i]);
-        }
-      }
-
-      return Object.keys(items);
+    const online = reactive({
+      error: props.onlineInfo.error,
+      warning: props.onlineInfo.warning,
+      normal: props.onlineInfo.normal,
     });
-    // console.log("offff", offlineSelectList);
+
+    watch(props, () => {
+      console.log("online!!", props.onlineInfo); //watch로 rerender
+      console.log("offline!!", props.offlineInfo); //watch로 rerender
+    });
+    let data: any = [];
+    // if (props.onlineInfo) {
+    data = [
+      ["Error", props.onlineInfo.error],
+      ["Warning", props.onlineInfo.warning],
+      ["Normal", props.onlineInfo.normal],
+    ];
+    // }
+    // if (props.offlineInfo) {
+    data = [
+      ["Error", props.offlineInfo.error],
+      ["Warning", props.offlineInfo.warning],
+      ["Normal", props.offlineInfo.normal],
+    ];
+    // }
 
     return {
-      offlineSelectList,
       chartOptions: {
         title: {
           text: "",
@@ -71,7 +92,7 @@ export default defineComponent({
             showInLegend: true,
           },
         },
-        colors: ["red", "yellow", "blue", "orange"],
+        colors: ["red", "yellow", "blue"],
         credits: {
           //remove mark
           enabled: false,
@@ -104,10 +125,15 @@ export default defineComponent({
             name: "",
             innerSize: "0%",
             data: [
-              ["1", 10.0],
-              ["2", 20.0],
-              ["3", 30.0],
-              ["4", 40.0],
+              props.onlineInfo.error
+                ? ["Error", props.onlineInfo.error]
+                : ["Error", props.offlineInfo?.error],
+              props.onlineInfo.warning
+                ? ["Warning", props.onlineInfo?.warning]
+                : ["Warning", props.offlineInfo?.warning],
+              props.onlineInfo.normal
+                ? ["Normal", props.onlineInfo?.normal]
+                : ["Normal", props.offlineInfo?.normal],
             ],
           },
         ],
